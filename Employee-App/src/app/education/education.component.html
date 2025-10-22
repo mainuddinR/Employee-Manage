@@ -1,0 +1,68 @@
+<div class="p-6">
+  <div class="container mx-auto max-w-2xl">
+    <h2 class="text-2xl font-semibold mb-4">Educational Information</h2>
+
+    <form [formGroup]="educationForm" (ngSubmit)="saveEducation()" class="bg-white p-6 rounded-lg shadow-md">
+    <div formArrayName="educations">
+        <div *ngFor="let edu of educations.controls; let i = index" [formGroupName]="i"
+             class="border border-gray-300 p-4 rounded-lg mb-4">
+
+          <!-- Degree -->
+          <div class="mb-3">
+            <label class="block text-gray-700 mb-1">Degree</label>
+            <select formControlName="degree"
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-400">
+              <option value="">Select Degree</option>
+              <option *ngFor="let d of degreeList" [value]="d">{{ d }}</option>
+            </select>
+          </div>
+
+          <!-- Institution -->
+          <div class="mb-3">
+            <label class="block text-gray-700 mb-1">Institution</label>
+            <input formControlName="institution"
+                   class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-400"
+                   placeholder="Enter Institution Name" />
+          </div>
+
+          <!-- Result & Year -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+            <div>
+              <label class="block text-gray-700 mb-1">Result</label>
+              <input formControlName="result"
+                     class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-400"
+                     placeholder="e.g. GPA 3.75" />
+            </div>
+            <div>
+              <label class="block text-gray-700 mb-1">Passing Year</label>
+              <input formControlName="passingYear" type="number"
+                     class="w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-400"
+                     placeholder="e.g. 2024" />
+            </div>
+          </div>
+
+          <!-- Remove Button -->
+          <div class="text-right">
+            <button type="button" (click)="removeEducation(i)"
+                    class="text-red-600 hover:text-red-800 text-sm underline">
+              Remove
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="flex justify-between items-center mt-4">
+        <button type="button" (click)="addEducation()"
+                class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
+          + Add More Education
+        </button>
+
+        <button type="submit"
+                class="px-6 py-2 bg-green-600 text-white rounded-full hover:bg-green-700">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
